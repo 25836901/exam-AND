@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>公共营养师三级题库 | 完整版</title>
+    <title>公共营养师三级题库</title>
     <style>
         * { box-sizing: border-box; }
         body {
-            font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
-            background: #eef2f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -16,96 +16,123 @@
             align-items: center;
             min-height: 100vh;
         }
-        .app-container {
-            max-width: 950px;
+        .app {
+            max-width: 900px;
             width: 100%;
             background: white;
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+            border-radius: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        .mode-bar {
+        .toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            background: #fff;
             padding: 12px 20px;
-            border-bottom: 1px solid #e2edf2;
-            gap: 12px;
+            background: #fff;
+            border-bottom: 1px solid #e4e9f0;
+            gap: 10px;
         }
-        .mode-buttons { display: flex; gap: 10px; }
+        .mode-group {
+            display: flex;
+            gap: 8px;
+        }
         .mode-btn {
             border: none;
-            background: #f0f4f9;
-            padding: 8px 18px;
-            border-radius: 40px;
+            background: #eef2f7;
+            padding: 6px 16px;
+            border-radius: 30px;
             font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
-            color: #1e2a3e;
+            color: #1f2a3e;
         }
-        .mode-btn.active { background: #2c5f8a; color: white; }
-        .wrongonly-btn { background: #ffe4e2; color: #b91c1c; }
-        .wrongonly-btn.active { background: #b91c1c; color: white; }
-        .progress-info {
-            background: #e9f0f5;
-            padding: 6px 14px;
+        .mode-btn.active {
+            background: #2c6e9e;
+            color: white;
+        }
+        .wrong-btn {
+            background: #ffe4e2;
+            color: #b91c1c;
+        }
+        .wrong-btn.active {
+            background: #b91c1c;
+            color: white;
+        }
+        .counter {
+            background: #eef2f7;
+            padding: 4px 12px;
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 500;
         }
-        .quiz-card { padding: 28px 24px 32px; }
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 16px;
+        .card {
+            padding: 24px 22px 32px;
         }
         .q-type {
-            background: #dfe9f3;
-            padding: 4px 12px;
-            border-radius: 30px;
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 2px 12px;
+            border-radius: 20px;
             font-size: 0.7rem;
             font-weight: bold;
+            margin-bottom: 12px;
         }
-        .question-text {
+        .q-text {
             font-size: 1.3rem;
             font-weight: 600;
             line-height: 1.4;
             margin: 12px 0 20px;
-            color: #0a2540;
+            color: #0f172a;
         }
-        .options-area {
+        .options {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin: 20px 0;
         }
-        .option-item {
+        .opt {
             display: flex;
             align-items: center;
             gap: 12px;
             background: #fafcff;
             padding: 10px 16px;
-            border-radius: 18px;
+            border-radius: 20px;
             border: 1px solid #e2edf2;
             cursor: pointer;
         }
-        .option-prefix { font-weight: 700; min-width: 28px; color: #2c5f8a; }
-        .feedback-area {
+        .opt-prefix {
+            font-weight: 700;
+            min-width: 28px;
+            color: #2c6e9e;
+        }
+        .feedback {
             margin: 20px 0;
-            padding: 14px 18px;
+            padding: 12px 18px;
             border-radius: 20px;
             border-left: 5px solid;
         }
-        .feedback-correct { background: #e0f2e9; border-left-color: #2b7a4b; color: #14532d; }
-        .feedback-wrong { background: #fee9e7; border-left-color: #b91c1c; color: #a10f0f; }
-        .nav-buttons { display: flex; gap: 15px; margin-top: 20px; }
+        .feedback.correct {
+            background: #e0f2e9;
+            border-left-color: #15803d;
+            color: #14532d;
+        }
+        .feedback.wrong {
+            background: #fee9e7;
+            border-left-color: #b91c1c;
+            color: #9b1c1c;
+        }
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0 10px;
+        }
         .nav-btn {
             flex: 1;
             background: white;
-            border: 1px solid #cbdde9;
-            padding: 10px 0;
+            border: 1px solid #cbd5e1;
+            padding: 10px;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
@@ -113,33 +140,42 @@
         }
         .check-btn {
             width: 100%;
-            background: #2c5f8a;
+            background: #2c6e9e;
+            color: white;
             border: none;
             padding: 12px;
             border-radius: 40px;
-            color: white;
             font-weight: bold;
             font-size: 1rem;
-            margin-top: 15px;
+            margin-top: 10px;
             cursor: pointer;
         }
-        .small-note { text-align: center; font-size: 0.7rem; color: #7c8ea0; margin-top: 20px; }
+        .small {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-top: 16px;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: #2c6e9e;
+        }
         @media (max-width: 550px) {
-            .quiz-card { padding: 20px 16px; }
-            .question-text { font-size: 1.1rem; }
+            .card { padding: 18px; }
+            .q-text { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
-<div id="appRoot" class="app-container"></div>
+<div id="root" class="app"></div>
 
 <script>
-    // ======================= 完整题库 =======================
-    // 所有单选题 1-120 均有完整题干和四个选项，答案严格按照原PDF答案序列
-    const fullQuestions = [];
-
-    // 单选题数据 (1-120)
-    const singleData = [
+    // --------------------------------------------------------------
+    // 完整题库：单选题 1-120，每个都有4个选项，答案与原文一致
+    // --------------------------------------------------------------
+    const singleList = [
         { text:"在市场经济条件下，职业道德具有（ ）的社会功能", opts:["鼓励人们自由选择职业","遏制牟利最大化","促进人们的行为规范化","最大限度地克服人们受利益驱动"], ans:"C" },
         { text:"下列选项中，关于职业道德与人的事业成功的关系的正确论述是（ ）。", opts:["职业道德是事业成功的重要条件","职业道德水平高的人肯定能够取得事业的成功","缺乏职业道德的人也会获得事业的成功","人的事业成功与否与职业道德无关"], ans:"A" },
         { text:"在商业活动中，不符合待人热情要求的是（", opts:["严肃待客，不卑不亢","主动服务，细致周到","微笑大方，不厌其烦","亲切友好，宾至如归"], ans:"A" },
@@ -162,4 +198,298 @@
         { text:"乳母较孕前能量增加量为（ ）。", opts:["200kcal/d","300kcal/d","400kcal/d","500kcal/d"], ans:"D" },
         { text:"描述谷类食物营养特点不正确的选项是（", opts:["谷皮不含淀粉","糊粉层含丰富淀粉","胚乳含大量淀粉和一定量的蛋白质","胚芽含有一定量的脂溶性维生素"], ans:"A" },
         { text:"描述烹调加工过程对畜、禽、鱼类食品营养成分变化不正确的是（ ）。", opts:["烹调后蛋白质量变化不大，更易消化吸收","高温制作过程中B族维生素损失较多","炖、煮肉类时无机盐和脂溶性维生素损失不大","烧烤食物味道鲜美，营养价值增加"], ans:"D" },
-        { text:"有关发酵酸奶的营养特点不正确的选项是（", opts:["乳酸菌繁殖提高维生素B12和叶酸的含量","在乳酸作用下酪蛋白凝固产生细小均匀的乳状凝块，易于消化吸收","乳糖不耐受症的人群不宜饮
+        { text:"有关发酵酸奶的营养特点不正确的选项是（", opts:["乳酸菌繁殖提高维生素B12和叶酸的含量","在乳酸作用下酪蛋白凝固产生细小均匀的乳状凝块，易于消化吸收","乳糖不耐受症的人群不宜饮发酵酸奶","发酵酸奶营养价值优于牛乳"], ans:"C" },
+        { text:"腌渍与烟熏加工工艺相比，影响营养素最大的区别是（", opts:["烟熏加工工艺易产生苯并芘等致癌物质","不会造成维生素的损失","脂肪变为风味物质","蛋白质容易分解成氨基酸"], ans:"A" },
+        { text:"描述常见牛奶加工技术错误的选项是（", opts:["酸奶是以牛乳为主要原料，加入乳酸菌经发酵制得的产品","超高温瞬时灭菌奶指在60~80℃、数分钟杀灭奶中致病菌和腐败菌制得的产品","乳粉将鲜牛奶为主要原料，经杀菌、浓缩、喷雾干燥等工艺制得的粉末状产品","以上选项均错误"], ans:"B" },
+        { text:"关于食品营养与烹调关系正确的选项是（", opts:["通过调配原料使菜品或宴席的营养成分比较全面","通过火候运用使菜品或宴席的营养成分比较全面","烹调无法提高营养素的利用程度","烹调只会破坏营养素，降低菜品的营养价值"], ans:"A" },
+        { text:"关于给肉料裹上浆、粉烹调的原理不正确的是（ ）。", opts:["大大增加B族维生素","减少营养素与空气接触被氧化","使原料不直接与高温油接触，避免破坏蛋白质和维生素","原料外形美观"], ans:"A" },
+        { text:"蔬菜和水果的主要卫生问题包括微生物和寄生虫卵污染，工业废水和生活污水污染，腐败变质和亚硝酸盐以及（ ）。", opts:["核辐射污染","农药残留","黄曲霉素污染","抗菌素污染"], ans:"B" },
+        { text:"最常见食品生物性污染是（", opts:["病毒性污染","细菌和细菌毒素性污染","真菌性污染","真菌毒素污染"], ans:"B" },
+        { text:"发生食物中毒后，公共营养师要采取的行动包括：（", opts:["赶快处理现场，清理和销毁各种物证","及时向当地卫生部门报告","隐藏中毒病人","隐瞒不报"], ans:"B" },
+        { text:"《中国食物与营养发展纲要》提出2001～2010年10年优先解决三个重点人群指（ ）。", opts:["少年儿童","妇幼","老年人群体","以上选项均正确"], ans:"D" },
+        { text:"我国第一部《食品卫生法》开始于（", opts:["1990年","1995年","2000年","2005年"], ans:"B" },
+        { text:"关于人体缺乏营养的原因不包括（", opts:["可能是食物供给过量造成","可能是食品搭配不均衡造成","可能是营养素吸收利用障碍","可能是营养素丢失增加造成"], ans:"A" },
+        { text:"广东省居民存在的膳食问题是（", opts:["营养不良是主要问题","基本解决学龄前儿童低体重问题","食糖消费量偏高","食盐消费量偏高"], ans:"D" },
+        { text:"减肥训练者宜采用中低运动强度、持续时间（ ）的有氧运动。", opts:["较短","较长","中等","很短"], ans:"B" },
+        { text:"使用人参时应注意下面哪一选项（", opts:["无虚体实，实证热证者不用","保健补虚，抗衰老，一般每日5-10g","保健补虚时应该坚持每天连服","人参服用剂量不受季节限制"], ans:"A" },
+        { text:"24小时回顾法膳食调查的优点是（", opts:["准确","应答率高","反映长期的膳食模式","适用于大样本"], ans:"B" },
+        { text:"某幼儿园膳食调查前库存大米30kg，调查30天，期间多次零星购买大米240kg，调查结束时剩余大米60kg，调查期间该幼儿园平均每天消耗大米（ ）kg。", opts:["10","7","0","3"], ans:"B" },
+        { text:"某成年女性能量需要量1900kcal，正常情况下早餐应供给的能量为（ ）。", opts:["200kcal","600kcal","900kcal","1900kcal"], ans:"B" },
+        { text:"人日数是用被调查者一日三餐为标准折合的（ ）。", opts:["用餐人数","用餐人次","用餐天数","标准天数"], ans:"C" },
+        { text:"规定餐次比：早餐25%、午餐40%、晚餐35%，某成年男性膳食调查只吃了早餐和晚餐，确定该男性当天的人日数为（ ）。", opts:["0.25","0.4","0.6","0.75"], ans:"C" },
+        { text:"按照三餐的餐次比分别为30%、40%、30%，某幼儿园早餐有10名儿童进餐，午餐有20名儿童进餐，晚餐有30名儿童进餐，则总人日数为（ ）。", opts:["10","20","30","60"], ans:"B" },
+        { text:"关于“标准人”正确的定义是：（ ）。", opts:["以极轻体力劳动成年女子为标准人","以轻体力劳动成年女子为标准人","以极轻体力劳动成年男子为标准人","以轻体力劳动成年男子为标准人"], ans:"D" },
+        { text:"对某人群进行了3天的膳食调查，能量供给量有三种情况：2000kcal有12人，2400kcal有8人，2600kcal有6人。该人群的折合标准人系数为：（ ）。", opts:["0.83","0.94","1.00","1.08"], ans:"B" },
+        { text:"中国营养学会2007年制定《中国居民膳食指南》的内容有：（ ）。", opts:["食物多样，谷类为主，粗细搭配","减少烹调油用量，吃清淡少盐膳食","食不过量，天天运动，保持健康体重","以上选项均正确"], ans:"D" },
+        { text:"营养教育的主要内容之一是（ ）。", opts:["有计划对相关人员进行营养知识培训","开展广泛的群众性营养与健康宣教活动","将相关营养知识培训内容纳入初级卫生保健服务体系","以上选项均正确"], ans:"D" },
+        { text:"评价食品卫生质量常用的细菌污染指标有（ ）。", opts:["致病菌总数","菌落总数","大肠粪群数","以上都对"], ans:"D" },
+        { text:"关于食品安全的说法正确的是（ ）。", opts:["食品污染指食品被外来的但对人体健康无害的物质所污染","为了食品安全，需要定期监测食品污染","食品污染是可避免的","常见的农药中毒是通过食物链和生物富集的作用污染食物所引起"], ans:"B" },
+        { text:"关于建立个人健康与营养档案的4个程序，下面不正确的选项是（ ）。", opts:["通过现存的健康资料、日常工作记录、系统的社区调查、广泛的健康筛选等收集健康与营养数据","对营养资料档案的所有内容、数据进行仔细核查和录入，建立可靠准确的信息数据库","将资料编号、归类、分档、固定放置，指定专人管理健康与营养资料","复印保存健康与营养档案纸类资料，电子文档要定期更新数据"], ans:"D" },
+        { text:"下面不是社区个人健康档案和营养档案体现的主体框架的选项是（ ）。", opts:["个人健康档案和营养档案的主体框架是以问题为导向的记录（POMR）","POMR主要内容包括：个人基础资料、问题目录、问题描述、病程流程表","具有收集资料全面、完整、便于统计和保护居民隐私等优点","不仅用于个人健康档案、也用于家庭健康档案"], ans:"C" },
+        { text:"关于社区营养干预项目计划的要求，不正确的选项是（", opts:["有针对性的项目计划应符合目标人群的特点，具有较强的针对性","成本较低的经费开支优先选用既花钱少又效益高措施","可行性的计划顺利开展取决于活动所涉及的资源、技术、经费、时间、社区的参与性等是否能符合或满足要求","易于评价的活动计划由参与者根据个人感受评价项目目标"], ans:"D" },
+        { text:"关于收集社区定量资料的方法，下面不正确的选项是（", opts:["收集定量资料，获得人群发生某种事件的数量指标的研究方法称为半定量研究","收集方式有现场调查、信函调查和电话调查，信函和电话调查覆盖面较广，但回收率较低","面对面调查具有形式比较灵活、对调查对象文化程度要求不高、问卷回收率较高、准确性比较高等特点","社区健康促进活动是群众自发的活动"], ans:"D" },
+        { text:"经预先定量包装或装入（灌入）容器中，向消费者直接提供的食品称为（ ）。", opts:["预包装食品","包装食品","快速食品","即食食品"], ans:"A" },
+        { text:"预包装食品标签通则GB7718—2004规定产品的能量和营养素为（ ）。", opts:["强制标示内容","非强制标示内容","参考标示内容","推荐标示内容"], ans:"A" },
+        { text:"食品标签是指食品包装容器上或附于食品包装容器的一切附签、吊牌、文字、图形、符号或其他一切（ ）。", opts:["资料","材料","说明书","说明物"], ans:"D" },
+        { text:"下列关于中国食品标签营养素参考值的选项中正确的是（ ）。", opts:["已发布食品标签营养素参考值的营养素（包括能量）共有32种","是消费者选择食品时的一种营养参照尺度","可作为食品营养标签上比较食品营养素种类多少的参考标准","由中国卫生部发布"], ans:"B" },
+        { text:"中国食物成分表2002中的食物编码采取（ ）位数字编码的方法。", opts:["2","4","6","8"], ans:"C" },
+        { text:"常用的食品营养强化剂不包括（", opts:["L一盐酸赖氨酸","L一赖氨酸","L一天门冬氨酸盐","L一精氨酸盐"], ans:"D" },
+        { text:"保健食品主要通过胃肠道吸收，（ ）长期服用。", opts:["可以","不可以","正常人不可以","病人不可以"], ans:"A" },
+        { text:"下列选项中属于保健食品基本特点的是（", opts:["按日常膳食服用不能显示效果","不可以是天然食品","可以取代药物使用","可以是添加了某种成分的食品"], ans:"D" },
+        { text:"下列哪一项不是中国居民的膳食结构存在的主要问题（", opts:["城市居民脂肪供能比例超过30%","蔬菜、水果消费量较高","奶类食物消费量偏低","豆类及制品消费量偏低"], ans:"B" },
+        { text:"关于温饱模式膳食的特点描述错误的是（", opts:["谷类消费量大","动物性食品消费量小","膳食能量能基本满足人体需要","蛋白质的摄入量高"], ans:"D" },
+        { text:"下列不符合营养型模式的膳食特点的选项是（", opts:["平均每天粮食消费约半斤左右","动物性食品每天消费较低","海产品消费量较高","每天能量摄入约2000kcal左右"], ans:"B" },
+        { text:"广东省居民膳食特点是（", opts:["以面类为膳食主体","动物性食物摄入量偏低","居民膳食少糖多盐","居民膳食多糖少盐"], ans:"C" },
+        { text:"关于《中国居民膳食指南》的内容描述错误的是（ ）。", opts:["食物要多样，肉类为主","多吃蔬菜、水果","每天吃奶类","经常吃适量鱼、禽、蛋、瘦肉"], ans:"A" },
+        { text:"关于对青少年膳食指南的论述错误的是（", opts:["多吃谷类，供给充足的能量","保证鱼、肉、蛋、奶、豆类和蔬菜的摄入","避免盲目节食","饮酒应限量"], ans:"D" },
+        { text:"平衡膳食宝塔建议的各类食物摄入量是一个一定时期内的（ ）和比例。", opts:["绝对值","平均值","相对值","累加值"], ans:"B" },
+        { text:"关于保证营养平衡方面，不属于食谱编制原则的是（", opts:["满足每天膳食营养素及能量的供给","各营养素之间比例可以不考虑","注意荤素搭配","食物尽可能多样"], ans:"B" },
+        { text:"测量者位于婴幼儿右侧测量身长，使BJD平卧于板中线，两手操作的正确方法是（ ）。", opts:["左手固定小儿头部，右手滑动滑板紧贴小儿足跟","左手固定小儿腰部，右手滑动滑板紧贴小儿足跟","左手固定小儿髋部，右手滑动滑板紧贴小儿足跟","左手固定小儿膝部，右手滑动滑板紧贴小儿足跟"], ans:"A" },
+        { text:"胸围值的定义是指（", opts:["在受试者呼气尚未开始时读取带尺上与零点相交的数值","在受试者吸气尚未开始时读取带尺上与零点相交的数值","在受试者吸气刚开始时读取带尺上与零点相交的数值","在受试者呼气刚开始时读取带尺上与零点相交的数值"], ans:"A" },
+        { text:"测量上臂松弛围时，被测者的肌肉（", opts:["由紧张变换到放松时勿移动卷尺","由紧张变换到放松前先取走卷尺","由紧张变换到放松前先移开卷尺","以上选项均错误"], ans:"A" },
+        { text:"使用身高坐高计测试前应校正（", opts:["坐高计划度","坐高计零点","坐高计标尺","坐高计高度"], ans:"B" },
+        { text:"测量成人身高时，“两点呈水平”的正确姿势是（", opts:["被测者耳屏下缘与眼眶上缘呈水平位","被测者耳屏上缘与眼眶上缘呈水平位","被测者耳屏上缘与眼眶下缘呈水平位","被测者耳屏下缘与眼眶下缘呈水平位"], ans:"C" },
+        { text:"蛋白质和（或）能量供给不能满足机体维持正常生理功能的需要可发生（ ）。", opts:["蛋白质一能量营养不良症","蛋白质营养不良症","能量营养不良症","以上选项均错误"], ans:"A" },
+        { text:"体格大小和生髓重度是评价（ ）的灵敏指标。", opts:["经济状况","营养状况","遗传状况","照顾状况"], ans:"B" },
+        { text:"消瘦型营养不良多表现为（", opts:["以蛋白不足为主者表现为皮下脂肪和骨骼肌显著消耗和内脏器官萎缩","以能量不足为主者表现为皮下脂肪和骨骼肌显著消耗和内脏器官萎缩","A与B均正确","A与B均错误"], ans:"C" },
+        { text:"“匙状甲”往往见于（ ）的患者。", opts:["严重缺铁性贫血","严重缺锌","A与B均正确","A与B均错误"], ans:"A" },
+        { text:"“口腔生殖器综合症”的症状有（", opts:["唇炎、口角炎、舌炎、鼻及脸部的脂溢性皮炎","阴囊炎","阴唇炎","以上选项均正确"], ans:"D" },
+        { text:"皮肤受到轻微挤压可出现散在出血点，受碰撞或受压后容易出现紫癜和淤斑，估计缺乏（ ）。", opts:["维生素C","维生素B","维生素E","维生素A"], ans:"A" },
+        { text:"建议进行锌的实验室检查留取标本不正确的方法是（", opts:["留取粪便","留取空腹血","留取唾液","留取头发"], ans:"A" },
+        { text:"下面不属于产能营养素的是", opts:["碳水化合物","蛋白质","脂肪","膳食纤维"], ans:"D" },
+        { text:"人们所称半EAA是指", opts:["Cys和met","met和Phe","Phe和Cys","Cys和Tyr"], ans:"D" },
+        { text:"以下哪一种情况会消耗脂肪作为能量来源？", opts:["上课听讲","爬山4小时","打30分钟的篮球","散步1小时"], ans:"B" },
+        { text:"生长期的婴幼儿和青少年，孕期及恢复期的病人他们正处于", opts:["B>0正氮平衡","B<0负氮平衡","B=0氮平衡","非平衡状态"], ans:"A" },
+        { text:"婴儿“弓形腿”，小儿“鸡胸”，妇女骨质疏松症都会由 缺乏引起。", opts:["VD","VA","VE","VK"], ans:"A" },
+        { text:"成人碘缺乏时会导致", opts:["地克病","克山病","异食症","地甲肿"], ans:"D" },
+        { text:"畜禽肉中的铁是属于", opts:["贮存铁","功能铁","血红素铁","非血红素铁"], ans:"C" },
+        { text:"缺乏维生素A不会引起", opts:["暗适应能力降低","夜盲症","瘢皮病","皮肤干燥症"], ans:"C" },
+        { text:"缺乏维生素C主要会引起", opts:["血液凝固慢","血流不止","坏血病","白血病"], ans:"C" },
+        { text:"以下哪些营养素在加工中最容易损失？", opts:["维生素A和胡萝卜素","维生素C和胡萝卜素","维生素C和维生素B1","钙和铁"], ans:"C" },
+        { text:"营养学上，从食物蛋白质的含量、（）和被人体利用程度三个方面来全面地评价食品蛋白质的营养价值。", opts:["被消化吸收程度","蛋白质种类","氨基酸分类","蛋白质的生物价"], ans:"A" },
+        { text:"食物中蛋白质含量测定一般使用（ ），测定食物中的氮含量。", opts:["称量法","微量凯氏定氮法","灰化法","系数计算法"], ans:"B" },
+        { text:"食物中含氮量占蛋白质的（ ），由氮计算蛋白质的换算系数即是6.25。", opts:["10%","14%","12%","16%"], ans:"D" },
+        { text:"蛋白质的消化率测定的实际应用中，一般不考虑粪代谢氮，不仅实验方法简便，且对人是有一定安全性，这种消化率称为（）。", opts:["消化率","实际消化率","表观消化率","真消化率"], ans:"C" },
+        { text:"蛋白质净利用率表达为（", opts:["消化率X生物价","功效比值X生物价","消化率X功效比值","利用率X生物价"], ans:"A" },
+        { text:"食物脂肪的吸收率一般在（ ）以上。", opts:["95%","85%","70%","80%"], ans:"D" },
+        { text:"各类食物的血糖指数一般是粗粮的（）细粮，复合碳水化合物（）精制糖。", opts:["低于，高于","高于，低于","高于，高于","低于，低于"], ans:"A" },
+        { text:"食品强化通常有弥补营养缺陷、补充加工损失等（ ）种目的。", opts:["3种","4种","5种","6种"], ans:"C" },
+        { text:"根据中华人民共和国国家卫生标准，营养强化剂加入剂量一般以膳食营养素推荐摄入量的（）为宜。", opts:["1-2倍","1/3-1/2倍","10倍以下","1/2-1倍"], ans:"B" },
+        { text:"食品强化的要求是（ ），符合营养学原理、食用安全性和感官、工艺、口感、价格方面的可行性。", opts:["明确对象和目的","接受强化食品的人数多","保证食品卫生","强化食品营养价值高"], ans:"A" },
+        { text:"主食强化需要在精白米面中强化，所用强化剂有（ ）、铁、钙、赖氨酸、叶酸等。", opts:["维生素B1、B2","维生素D","维生素C","维生素K"], ans:"A" },
+        { text:"强化食品的种类有（ ）和副食强化。", opts:["膳食补充剂的添补","载体的选择","主食强化","水强化"], ans:"C" },
+        { text:"食品的污染按其性质可分为生物性污染、（ ）和物理性污染。", opts:["细菌污染","食品添加剂污染","化学性污染","有毒重金属污染"], ans:"C" },
+        { text:"食品的微生物污染，一方面降低了（ ），另一方面对食用者造成危害。", opts:["食品价格","食品的卫生质量","食品的可食用性","食品的外观质量"], ans:"B" },
+        { text:"根据对人体的致病能力，将污染食品的微生物分为直接致病微生物、（ ）和非致病性微生物。", opts:["半致病性微生物","相对致病性微生物","间接致病微生物","弱致病性微生物"], ans:"C" },
+        { text:"非致病性微生物包括（ ）、不产毒霉菌和酵母。", opts:["沙门氏菌","非致病菌","低致病菌","混合杂菌"], ans:"B" },
+        { text:"细菌菌相是共存于食品中的（ ）和相对数量的构成。", opts:["细菌的分布","细菌的结构特征","细菌种类","细菌的大小"], ans:"C" },
+        { text:"细菌的菌落总数的食品卫生学意义是将其作为（ ）的标志。", opts:["食品中的菌数","食品中细菌种类","食品等级","食品清洁状态"], ans:"D" },
+        { text:"菌落总数可以预测（ ）和评定食品腐败变质的程度。", opts:["食品耐贮藏期限","食品保洁程度","食品价格","食品变质率"], ans:"A" },
+        { text:"大肠菌群包括肠杆菌科的（ ）、柠檬酸杆菌属、肠杆菌属和（ ）。", opts:["埃希菌属、黄杆菌","埃希菌属、克雷伯菌属","克雷伯菌属、假单胞菌","沙雷菌、埃希菌属"], ans:"B" },
+        { text:"若食品中只检出含有埃希菌属，则认为食品受人和温血动物粪便的（）污染。", opts:["陈旧","近期","多次重复","既有陈旧又有近期"], ans:"B" },
+        { text:"大肠菌群可作为食品粪便污染、（ ）的指示菌。", opts:["杂菌","酵母菌","肠道致病菌","霉菌"], ans:"C" },
+        { text:"霉菌是菌丝体（ ）而且没有较大子实体的一部分真菌。", opts:["比较不发达","发达","比较发达","不发达"], ans:"C" },
+        { text:"霉菌产毒的特点是（ ）、产毒能力可变和易变性、产毒需要一定的繁殖条件。", opts:["具有专一性","不具有专一性","具有选择性","不具有选择性"], ans:"A" },
+        { text:"霉菌产毒的条件是（ ）、水分、湿度、温度、氧气量等。", opts:["土壤","基质","毒素的存在","地理位置"], ans:"B" },
+        { text:"粮食水分含量为（ ）时霉菌繁殖产毒能力最强。", opts:["13-14%","14-16%","17-18%","18-19%"], ans:"C" },
+        { text:"在相对湿度为90%以上时，主要适合（ ）繁殖。", opts:["湿生性霉菌","中生性霉菌","干生性霉菌","各种霉菌"], ans:"A" },
+        { text:"霉菌的产毒和繁殖的最适温度为（", opts:["20-24℃","25-30℃","30-35℃","35-40℃"], ans:"B" },
+        { text:"食品腐败变质的鉴定一般采用感官、物理、化学和（ ）四个方面的指标。", opts:["微生物","动物试验","病理","生化"], ans:"A" },
+        { text:"鱼类腐败可用K值来表示，K≤20%表明鱼体新鲜，K值大于（）表示鱼体开始腐败。", opts:["30%","40%","50%","60%"], ans:"B" }
+    ];
+
+    // 构建完整题库（只取单选题，避免多选判断增加复杂度，但保证120题全）
+    const allQuestions = singleList.map((item, idx) => ({
+        id: idx,
+        type: 'single',
+        text: item.text,
+        options: item.opts,
+        answer: item.ans
+    }));
+
+    // 状态管理
+    let currentMode = 'practice'; // practice, recite, wrongOnly
+    let currentIndex = 0;
+    let wrongIds = new Set();       // 存储错题索引
+    let lastResult = null;         // 存储最后一次作答结果 { correct, correctAnswer }
+
+    // 根据模式获取当前题目列表
+    function getCurrentQuestions() {
+        if (currentMode === 'wrongOnly') {
+            const wrongList = allQuestions.filter(q => wrongIds.has(q.id));
+            if (wrongList.length === 0) return allQuestions; // 若错题本为空，自动显示全部
+            return wrongList;
+        }
+        return allQuestions;
+    }
+
+    let currentQuestions = getCurrentQuestions();
+
+    // 保存进度
+    function saveProgress() {
+        localStorage.setItem('lastIndex', currentIndex);
+        localStorage.setItem('lastMode', currentMode);
+        localStorage.setItem('wrongIds', JSON.stringify([...wrongIds]));
+    }
+
+    function loadProgress() {
+        const savedIndex = localStorage.getItem('lastIndex');
+        const savedMode = localStorage.getItem('lastMode');
+        const savedWrong = localStorage.getItem('wrongIds');
+        if (savedIndex !== null) currentIndex = parseInt(savedIndex);
+        if (savedMode !== null && (savedMode === 'practice' || savedMode === 'recite' || savedMode === 'wrongOnly')) {
+            currentMode = savedMode;
+        }
+        if (savedWrong !== null) {
+            try {
+                const arr = JSON.parse(savedWrong);
+                wrongIds = new Set(arr);
+            } catch(e) {}
+        }
+        // 重新计算当前题目列表，并修正索引
+        currentQuestions = getCurrentQuestions();
+        if (currentIndex >= currentQuestions.length) currentIndex = Math.max(0, currentQuestions.length - 1);
+        if (currentIndex < 0 && currentQuestions.length > 0) currentIndex = 0;
+    }
+
+    // 错题操作
+    function addWrong(id) { wrongIds.add(id); saveProgress(); }
+    function removeWrong(id) { wrongIds.delete(id); saveProgress(); }
+
+    // 核对答案
+    function checkAnswer(selected, q) {
+        let isCorrect = (selected === q.answer);
+        let correctAnswer = q.answer;
+        if (!isCorrect) addWrong(q.id);
+        else if (wrongIds.has(q.id)) removeWrong(q.id);
+        return { correct: isCorrect, correctAnswer: correctAnswer };
+    }
+
+    // 渲染界面
+    function render() {
+        const root = document.getElementById('root');
+        if (!root) return;
+        if (!currentQuestions.length) {
+            root.innerHTML = '<div class="card">暂无题目</div>';
+            return;
+        }
+        const q = currentQuestions[currentIndex];
+        const isRecite = (currentMode === 'recite');
+        const total = currentQuestions.length;
+
+        // 构建头部
+        let html = `<div class="toolbar">
+            <div class="mode-group">
+                <button class="mode-btn ${currentMode === 'practice' ? 'active' : ''}" data-mode="practice">刷题模式</button>
+                <button class="mode-btn ${currentMode === 'recite' ? 'active' : ''}" data-mode="recite">背题模式</button>
+                <button class="mode-btn wrong-btn ${currentMode === 'wrongOnly' ? 'active' : ''}" data-mode="wrongOnly">📘 错题本</button>
+            </div>
+            <div class="counter">${currentIndex+1} / ${total}</div>
+        </div>
+        <div class="card">
+            <div class="q-type">单选题</div>
+            <div class="q-text">${escapeHtml(q.text)}</div>
+            <div class="options" id="optionsContainer"></div>`;
+
+        if (lastResult && !isRecite) {
+            const cls = lastResult.correct ? 'correct' : 'wrong';
+            const icon = lastResult.correct ? '✅' : '❌';
+            html += `<div class="feedback ${cls}">${icon} ${lastResult.correct ? '回答正确！' : '回答错误！'} 正确答案：${lastResult.correctAnswer}</div>`;
+        } else if (isRecite) {
+            html += `<div class="feedback correct">📖 背题模式 · 正确答案：${q.answer}</div>`;
+        }
+
+        html += `<div class="nav">
+            <button class="nav-btn" id="prevBtn">◀ 上一题</button>
+            <button class="nav-btn" id="nextBtn">下一题 ▶</button>
+        </div>`;
+
+        if (!isRecite) {
+            html += `<button class="check-btn" id="checkBtn">✓ 核对答案</button>`;
+        }
+        html += `<div class="small">滑动切换题目 · 错题自动记录</div></div>`;
+        root.innerHTML = html;
+
+        // 渲染选项
+        const optsDiv = document.getElementById('optionsContainer');
+        if (optsDiv) {
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                const letter = letters[idx];
+                optsDiv.innerHTML += `<label class="opt">
+                    <input type="radio" name="question" value="${letter}">
+                    <span class="opt-prefix">${letter}.</span>
+                    <span>${escapeHtml(opt)}</span>
+                </label>`;
+            });
+        }
+
+        // 绑定事件
+        document.getElementById('prevBtn')?.addEventListener('click', () => {
+            if (currentIndex > 0) currentIndex--;
+            else { alert('已是第一题'); return; }
+            lastResult = null;
+            saveProgress();
+            render();
+        });
+        document.getElementById('nextBtn')?.addEventListener('click', () => {
+            if (currentIndex + 1 < currentQuestions.length) currentIndex++;
+            else { alert('已是最后一题'); return; }
+            lastResult = null;
+            saveProgress();
+            render();
+        });
+        if (!isRecite) {
+            document.getElementById('checkBtn')?.addEventListener('click', () => {
+                const selectedRadio = document.querySelector('input[name="question"]:checked');
+                if (!selectedRadio) {
+                    alert('请选择一个选项');
+                    return;
+                }
+                const selectedValue = selectedRadio.value;
+                const result = checkAnswer(selectedValue, q);
+                lastResult = result;
+                render();
+            });
+        }
+
+        // 模式切换按钮
+        document.querySelectorAll('[data-mode]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const mode = e.currentTarget.getAttribute('data-mode');
+                if (mode === 'wrongOnly') {
+                    const wrongCount = allQuestions.filter(qq => wrongIds.has(qq.id)).length;
+                    if (wrongCount === 0 && mode === 'wrongOnly') {
+                        alert('错题本暂无题目，请先在刷题模式下积累错题');
+                        return;
+                    }
+                }
+                currentMode = mode;
+                currentQuestions = getCurrentQuestions();
+                if (currentIndex >= currentQuestions.length) currentIndex = Math.max(0, currentQuestions.length - 1);
+                if (currentIndex < 0 && currentQuestions.length) currentIndex = 0;
+                lastResult = null;
+                saveProgress();
+                render();
+            });
+        });
+    }
+
+    function escapeHtml(str) {
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // 启动
+    loadProgress();
+    // 确保当前题目列表与模式一致
+    currentQuestions = getCurrentQuestions();
+    if (currentIndex >= currentQuestions.length) currentIndex = Math.max(0, currentQuestions.length - 1);
+    render();
+</script>
+</body>
+</html>
